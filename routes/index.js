@@ -20,34 +20,34 @@ async function webhook(req){
       ErrorSnoozeURL,
       SessionURL,
       UserIdentifier,
+      ErrorCount,
       Query,
-      ErrorCount
     } = req.body;
 
-    // const query = parseParams(Query)
+    const q = parseParams(Query);
 
     const payload = {
       msgtype: "template_card",
       template_card: {
         card_type: "text_notice",
         source: {
-          icon_url: "https://storage.googleapis.com/organization-image-assets/highlightio-botAvatarSrcUrl-1718084264557.svg",
+          icon_url: "https://s1.aigei.com/src/img/gif/4a/4a679daabe894daf8a7b5786375ac806.gif?e=2051020800&token=P7S2Xpzfz11vAkASLTkfHN7Fw-oOZBecqeJaxypL:bPjMObt4ABe8t0Olsjns9o3DZXo=",
           desc: `🙋‍♀️ ${UserIdentifier}`,
           desc_color: 2
         },
         main_title: {
-          title: `🐞${ErrorCount}😱`,
-          desc: "错误次数"
+          title: q.environment,
+          // desc: "错误次数"
         },
         emphasis_content: {
-          // title: query.environment,
-          desc: `参数：${Query}`
+          title: `${ErrorCount}`,
+          desc: '出现次数'
         },
         quote_area: {
           type: 0,
-          url: ErrorURL,
-          // title: "错误详情",
-          quote_text: ErrorTitle
+          // url: ErrorURL,
+          // title: "1",
+          quote_text: `${ErrorTitle}\n\n${Query}`
         },
         // sub_title_text: "点击链接快速处理此错误",
         // horizontal_content_list: [
@@ -76,10 +76,17 @@ async function webhook(req){
         //     url: ErrorSnoozeURL
         //   }
         // ],
-        // card_action: {
-        //   type: 1,
-        //   url: ErrorURL
-        // }
+        // jump_list: [
+        //   {
+        //     type: 1,
+        //     url: ErrorURL,
+        //     title: "查看错误"
+        //   }
+        // ],
+        card_action: {
+          type: 1,
+          url: ErrorURL
+        }
       }
     };
 
@@ -97,10 +104,10 @@ async function webhook(req){
       throw new Error(`Forwarding failed with status ${response.status}`);
     }
 
-    // res.status(200).json({ message: 'Forwarded successfully' });
+// res.status(200).json({ message: 'Forwarded successfully' });
   } catch (error) {
     console.error('Webhook error:', error);
-    // res.status(500).json({ message: 'Internal Server Error' });
+// res.status(500).json({ message: 'Internal Server Error' });
   }
 }
 
