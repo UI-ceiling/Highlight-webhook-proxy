@@ -24,7 +24,7 @@ async function webhook(req){
       ErrorCount
     } = req.body;
 
-    const query = parseParams(Query)
+    // const query = parseParams(Query)
 
     const payload = {
       msgtype: "template_card",
@@ -40,7 +40,7 @@ async function webhook(req){
           desc: "错误次数"
         },
         emphasis_content: {
-          title: query.environment,
+          // title: query.environment,
           desc: `参数：${Query}`
         },
         quote_area: {
