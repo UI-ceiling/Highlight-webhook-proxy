@@ -2,11 +2,14 @@ var express = require('express');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  webhook(req)
+router.post('/', async function(req, res, next) {
+  await webhook(req)
+  res.send('respond with a resource');
+  console.log('g3h21b3v')
 });
 
 async function webhook(req){
+  console.log(req)
   try {
     const {
       AlertName,
