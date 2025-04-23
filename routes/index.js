@@ -25,6 +25,10 @@ async function webhook(req){
     } = req.body;
 
     // const q = parseParams(Query);
+    const isProd = UserIdentifier.startsWith('prod');
+    const env = UserIdentifier.split('-')[0];
+
+    console.log(env)
 
     const payload = {
       msgtype: "template_card",
@@ -32,12 +36,11 @@ async function webhook(req){
         card_type: "text_notice",
         source: {
           icon_url: "https://s1.aigei.com/src/img/gif/4a/4a679daabe894daf8a7b5786375ac806.gif?e=2051020800&token=P7S2Xpzfz11vAkASLTkfHN7Fw-oOZBecqeJaxypL:bPjMObt4ABe8t0Olsjns9o3DZXo=",
-          desc: `🙋‍♀️ ${UserIdentifier}`,
-          desc_color: 2
+          desc: `${isProd ? '💣️生产问题💣️' : '🙋‍♀️️'}  ${UserIdentifier}`,
+          desc_color: isProd ? 2 : 1,
         },
         main_title: {
-          // title: q.environment,
-          // desc: "错误次数"
+          title: `环境：${env}`,
         },
         emphasis_content: {
           title: `${ErrorCount}`,
@@ -47,7 +50,7 @@ async function webhook(req){
           type: 0,
           // url: ErrorURL,
           // title: "1",
-          quote_text: `${ErrorTitle}\n\n${JSON.stringify(req.body)}`
+          quote_text: `${ErrorTitle}}`
         },
         // sub_title_text: "点击链接快速处理此错误",
         // horizontal_content_list: [
@@ -100,7 +103,7 @@ async function webhook(req){
       body: JSON.stringify(payload),
     });
 
-    console.log('response => ', response)
+    console.log('response => ', response.body)
 
     if (!response.ok) {
       throw new Error(`Forwarding failed with status ${response.status}`);
