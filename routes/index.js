@@ -113,17 +113,14 @@ async function webhook(req){
   }
 }
 
-function parseParams(str) {
-  try{
-
-  }
-  const obj = {};
-  str.split('&').forEach(pair => {
-    const [key, value] = pair.split('=');
-    if (key) obj[key] = value ?? '';
-  });
-  return obj;
-}
+// function parseParams(str) {
+//   const obj = {};
+//   str.split('&').forEach(pair => {
+//     const [key, value] = pair.split('=');
+//     if (key) obj[key] = value ?? '';
+//   });
+//   return obj;
+// }
 
 
 module.exports = router;
