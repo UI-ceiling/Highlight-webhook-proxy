@@ -1,10 +1,12 @@
-// File: api/webhook.js
+var express = require('express');
+var router = express.Router();
 
-export default async function handler(req) {
-  // if (req.method !== 'POST') {
-  //   return res.status(405).json({ message: 'Method Not Allowed' });
-  // }
+/* GET home page. */
+router.get('/', function(req, res, next) {
+  webhook(req)
+});
 
+async function webhook(req){
   try {
     const {
       AlertName,
@@ -101,3 +103,5 @@ export default async function handler(req) {
     // res.status(500).json({ message: 'Internal Server Error' });
   }
 }
+
+module.exports = router;
