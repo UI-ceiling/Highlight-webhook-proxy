@@ -21,10 +21,10 @@ async function webhook(req){
       SessionURL,
       UserIdentifier,
       ErrorCount,
-      Query,
+      // Query,
     } = req.body;
 
-    const q = parseParams(Query);
+    // const q = parseParams(Query);
 
     const payload = {
       msgtype: "template_card",
@@ -36,7 +36,7 @@ async function webhook(req){
           desc_color: 2
         },
         main_title: {
-          title: q.environment,
+          // title: q.environment,
           // desc: "错误次数"
         },
         emphasis_content: {
@@ -47,7 +47,7 @@ async function webhook(req){
           type: 0,
           // url: ErrorURL,
           // title: "1",
-          quote_text: `${ErrorTitle}\n\n${Query}`
+          quote_text: `${ErrorTitle}\n\n${JSON.stringify(req.body)}`
         },
         // sub_title_text: "点击链接快速处理此错误",
         // horizontal_content_list: [
@@ -100,6 +100,8 @@ async function webhook(req){
       body: JSON.stringify(payload),
     });
 
+    console.log('response => ', response)
+
     if (!response.ok) {
       throw new Error(`Forwarding failed with status ${response.status}`);
     }
@@ -112,6 +114,9 @@ async function webhook(req){
 }
 
 function parseParams(str) {
+  try{
+
+  }
   const obj = {};
   str.split('&').forEach(pair => {
     const [key, value] = pair.split('=');
