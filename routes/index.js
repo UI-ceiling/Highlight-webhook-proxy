@@ -5,7 +5,6 @@ var router = express.Router();
 router.post('/', async function(req, res, next) {
   await webhook(req)
   res.send('respond with a resource');
-  console.log('g3h21b3v')
 });
 
 async function webhook(req){
