@@ -35,7 +35,7 @@ async function webhook(req){
         card_type: "text_notice",
         source: {
           icon_url: "https://s1.aigei.com/src/img/gif/4a/4a679daabe894daf8a7b5786375ac806.gif?e=2051020800&token=P7S2Xpzfz11vAkASLTkfHN7Fw-oOZBecqeJaxypL:bPjMObt4ABe8t0Olsjns9o3DZXo=",
-          desc: `${isProd ? '💣️生产问题️' : '🙋‍♀️️'}  ${UserIdentifier}`,
+          desc: `${isProd ? '事情变得有趣起来了🧐' : '🙋‍♀️️'}  ${UserIdentifier}`,
           desc_color: isProd ? 2 : 1,
         },
         main_title: {
