@@ -36,11 +36,11 @@ async function webhook(req){
         card_type: "text_notice",
         source: {
           icon_url: "https://s1.aigei.com/src/img/gif/4a/4a679daabe894daf8a7b5786375ac806.gif?e=2051020800&token=P7S2Xpzfz11vAkASLTkfHN7Fw-oOZBecqeJaxypL:bPjMObt4ABe8t0Olsjns9o3DZXo=",
-          desc: `${isProd ? '💣️生产问题💣️' : '🙋‍♀️️'}  ${UserIdentifier}`,
+          desc: `${isProd ? '💣️生产问题️' : '🙋‍♀️️'}  ${UserIdentifier}`,
           desc_color: isProd ? 2 : 1,
         },
         main_title: {
-          title: `环境：${env}`,
+          title: `🌍:${env}`,
         },
         emphasis_content: {
           title: `${ErrorCount}`,
@@ -48,44 +48,8 @@ async function webhook(req){
         },
         quote_area: {
           type: 0,
-          // url: ErrorURL,
-          // title: "1",
-          quote_text: `${ErrorTitle}}`
+          quote_text: `${ErrorTitle}`
         },
-        // sub_title_text: "点击链接快速处理此错误",
-        // horizontal_content_list: [
-        //   {
-        //     keyname: "查看",
-        //     value: "错误详情",
-        //     type: 1,
-        //     url: ErrorURL
-        //   },
-        //   {
-        //     keyname: "标记为已解决",
-        //     value: "立即处理",
-        //     type: 1,
-        //     url: ErrorResolveURL
-        //   },
-        //   {
-        //     keyname: "忽略错误",
-        //     value: "不再提示",
-        //     type: 1,
-        //     url: ErrorIgnoreURL
-        //   },
-        //   {
-        //     keyname: "稍后处理",
-        //     value: "Snooze",
-        //     type: 1,
-        //     url: ErrorSnoozeURL
-        //   }
-        // ],
-        // jump_list: [
-        //   {
-        //     type: 1,
-        //     url: ErrorURL,
-        //     title: "查看错误"
-        //   }
-        // ],
         card_action: {
           type: 1,
           url: ErrorURL
