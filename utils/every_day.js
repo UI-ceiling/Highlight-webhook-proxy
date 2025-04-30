@@ -35,6 +35,11 @@ async function push(title, desc, img){
     const {mp4_video} = await get_plmm_video();
     const {url} = await get_plmm_img();
 
+    console.log('url =>>>>>>>>>>>>>>>>>', {
+      mp4_video,
+      url,
+    })
+
     const payload = {
       "msgtype": "news",
       "news": {
@@ -48,6 +53,8 @@ async function push(title, desc, img){
         ]
       }
     };
+
+    console.log('payload =>>>>>>>', payload)
 
     const webhookURL = 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=d074b6c5-c660-4c30-88ee-114dc76f3a98'; // Replace this
 

@@ -3,8 +3,8 @@ var {push_plmm} = require('../utils/every_day')
 var router = express.Router();
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  push_plmm();
+router.get('/', async function(req, res, next) {
+  await push_plmm();
   res.send('推送plmm');
 });
 
