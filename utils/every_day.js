@@ -75,6 +75,22 @@ async function push(title, desc, img){
 // res.status(200).json({ message: 'Forwarded successfully' });
   } catch (error) {
     console.error('Webhook error:', error);
+
+    const webhookURL = 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=d074b6c5-c660-4c30-88ee-114dc76f3a98'; // Replace this
+
+    const response = await fetch(webhookURL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        "msgtype": "text",
+        "text": {
+          "content": `push error: ${error.message}`,
+          "mentioned_mobile_list":["18233279029"]
+        }
+      }),
+    });
 // res.status(500).json({ message: 'Internal Server Error' });
   }
 }
