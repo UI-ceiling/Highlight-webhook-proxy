@@ -1,5 +1,4 @@
 var express = require('express');
-const {get_plmm_video} = require('../utils/plmm')
 var router = express.Router();
 
 /* GET home page. */
@@ -27,7 +26,6 @@ async function webhook(req){
     // const q = parseParams(Query);
     const isProd = UserIdentifier.startsWith('prod');
     const env = UserIdentifier.split('-')[0];
-    const {mp4_video} = await get_plmm_video();
 
     console.log(env)
 
@@ -53,7 +51,7 @@ async function webhook(req){
         },
         card_action: {
           type: 1,
-          url: mp4_video,
+          url: ErrorURL
         }
       }
     };
