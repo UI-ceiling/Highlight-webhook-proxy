@@ -35,7 +35,7 @@ async function get_plmm_img() {
   } catch (e) {
     console.log('error', e)
     return {
-      url: 'https://filehelper.weixin.qq.com/cgi-bin/mmwebwx-bin/webwxgetmsgimg?&MsgID=3505350264853555127&skey=%40crypt_92b1b847_6dc5d041d19c4558fbecc021f1659684&mmweb_appid=wx_webfilehelper&type=big',
+      url: '',
     }
   }
 }
