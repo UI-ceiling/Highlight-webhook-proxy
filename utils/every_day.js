@@ -27,7 +27,7 @@ function morning(){
 }
 
 function push_plmm(title){
-  push(title || '主动触发', '👌\n\nI\'m fine')
+  return push(title || '主动触发', '👌\n\nI\'m fine')
 }
 
 async function push(title, desc, img){
@@ -65,9 +65,11 @@ async function push(title, desc, img){
       throw new Error(`Forwarding failed with status ${response.status}`);
     }
 
+    return 'success';
 // res.status(200).json({ message: 'Forwarded successfully' });
   } catch (error) {
     console.error('Webhook error:', error);
+    return 'error' + error.toString();
 // res.status(500).json({ message: 'Internal Server Error' });
   }
 }
