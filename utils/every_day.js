@@ -14,20 +14,18 @@ async function every_day(){
 
   hoursExecutionHours.forEach(hour => {
     cron.schedule(`10 ${hour} * * *`, async () => {
-      if(await get_today_is_work_day()) {
-        push_plmm('定时触发');
-      }
+      await test_hour();
     });
   });
 }
 
 
-function morning(){
-  push('工作日-' + new Date().toLocaleString(), '一切正常');
+async function morning(){
+  await push('工作日-' + new Date().toLocaleString(), '一切正常');
 }
 
-function push_plmm(title){
-  return push(title || '主动触发', '👌\n\nI\'m fine')
+async function push_plmm(title){
+  return await push(title || '主动触发', '👌\n\nI\'m fine')
 }
 
 async function push(title, desc, img){
@@ -69,13 +67,26 @@ async function push(title, desc, img){
 // res.status(200).json({ message: 'Forwarded successfully' });
   } catch (error) {
     console.error('Webhook error:', error);
+    await push('推送失败', 'error: ' + error.toString());
     return 'error' + error.toString();
 // res.status(500).json({ message: 'Internal Server Error' });
   }
 }
 
+async function test_hour(){
+  try{
+    if(await get_today_is_work_day()) {
+      await push_plmm('定时触发');
+    }
+    return 'success';
+  }catch(e){
+    await push('定时触发失败', 'error: ' + e.toString());
+    return 'error' + e.toString();
+  }
+}
 
 module.exports = {
   every_day,
   push_plmm,
+  test_hour,
 }
