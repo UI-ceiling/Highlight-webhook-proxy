@@ -5,7 +5,7 @@ const cron = require('node-cron');
 // module.exports = async function webhook(req){
 async function every_day(){
   cron.schedule('15 8 * * *', () => {
-    if(get_today_is_work_day){
+    if(get_today_is_work_day()){
       morning();
     }
   });
@@ -14,7 +14,7 @@ async function every_day(){
 
   hoursExecutionHours.forEach(hour => {
     cron.schedule(`10 ${hour} * * *`, () => {
-      if(get_today_is_work_day) {
+      if(get_today_is_work_day()) {
         push_plmm('定时触发');
       }
     });
