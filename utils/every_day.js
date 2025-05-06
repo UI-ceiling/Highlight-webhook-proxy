@@ -14,7 +14,15 @@ async function every_day(){
 
   hoursExecutionHours.forEach(hour => {
     cron.schedule(`10 ${hour} * * *`, async () => {
-      await test_hour();
+      try{
+        if(await get_today_is_work_day()) {
+          await push_plmm(`${hour}:10 自动触发`);
+        }
+        return 'success';
+      }catch(e){
+        await push('定时触发失败', 'error: ' + e.toString());
+        return 'error' + e.toString();
+      }
     });
   });
 }
@@ -24,8 +32,8 @@ async function morning(){
   await push('工作日-' + new Date().toLocaleString(), '一切正常');
 }
 
-async function push_plmm(title){
-  return await push(title || '主动触发', '👌\n\nI\'m fine')
+async function push_plmm(title, desc){
+  return await push(title || '主动触发',  desc || '👌\n\nI\'m fine')
 }
 
 async function push(title, desc, img){
@@ -76,7 +84,7 @@ async function push(title, desc, img){
 async function test_hour(){
   try{
     if(await get_today_is_work_day()) {
-      await push_plmm('定时触发');
+      await push_plmm('手动访问触发', '测试');
     }
     return 'success';
   }catch(e){
