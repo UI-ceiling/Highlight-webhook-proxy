@@ -4,7 +4,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
+var webhook1 = require('./routes/webhook-1');
+var webhook2 = require('./routes/webhook-2');
+var webhook3 = require('./routes/webhook-3');
+var webhook4 = require('./routes/webhook-4');
 var usersRouter = require('./routes/users');
 var plmmRouter = require('./routes/plmm');
 var testRouter = require('./routes/test');
@@ -22,7 +25,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/webhook', indexRouter);
+app.use('/webhook-1', webhook1);
+app.use('/webhook-2', webhook2);
+app.use('/webhook-3', webhook3);
+app.use('/webhook-4', webhook4);
 app.use('/', usersRouter);
 app.use('/users', usersRouter);
 app.use('/mm', plmmRouter);
