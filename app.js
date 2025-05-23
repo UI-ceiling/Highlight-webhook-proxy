@@ -3,6 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const { Logtail } = require("@logtail/node");
+const { logtailExpressMiddleware } = require("@logtail/express");
 
 var webhook1 = require('./routes/webhook-1');
 var webhook2 = require('./routes/webhook-2');
@@ -18,8 +20,27 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
+const logtail = new Logtail("b92SVDom11fSQxnfNDFtEW7E");
 
-app.use(logger('dev'));
+app.use(function(err, req, res, next) {
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  // ✅ 把错误信息发送到 Logtail
+  logtail.error("Express error", {
+    status: err.status,
+    message: err.message,
+    stack: err.stack,
+    url: req.originalUrl,
+    method: req.method,
+    ip: req.ip,
+  });
+
+  res.status(err.status || 500);
+  res.render('error');
+});
+
+app.use(logtailExpressMiddleware(logtail));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -33,6 +54,8 @@ app.use('/', usersRouter);
 app.use('/users', usersRouter);
 app.use('/mm', plmmRouter);
 app.use('/test', testRouter);
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
