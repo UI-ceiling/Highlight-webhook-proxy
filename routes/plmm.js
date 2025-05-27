@@ -4,10 +4,6 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', async function(req, res, next) {
-  logtail.info("用户提交 mm 数据", {
-    payload: req.body,
-    ip: req.ip,
-  });
   const r = await push_plmm('手动访问触发', '探活');
   res.send(r);
 });
