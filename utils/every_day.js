@@ -57,19 +57,19 @@ async function push(title, desc, img){
 
     const webhookURL = 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=d074b6c5-c660-4c30-88ee-114dc76f3a98'; // Replace this
 
-    const response = await fetch(webhookURL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(payload),
-    });
-
-    console.log('response => ', response.body)
-
-    if (!response.ok) {
-      throw new Error(`Forwarding failed with status ${response.status}`);
-    }
+    // const response = await fetch(webhookURL, {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify(payload),
+    // });
+    //
+    // console.log('response => ', response.body)
+    //
+    // if (!response.ok) {
+    //   throw new Error(`Forwarding failed with status ${response.status}`);
+    // }
 
     return 'success';
 // res.status(200).json({ message: 'Forwarded successfully' });
