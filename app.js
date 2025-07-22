@@ -68,6 +68,6 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-every_day();
+// every_day();
 
 module.exports = app;
